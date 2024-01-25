@@ -4,7 +4,6 @@ package org.example.kolosTest;
 
 import org.springframework.stereotype.Component;
 
-@Component
 public enum OrderStatus {
     BRAK("Nie ma takiego zamowienia"),
     NOWE("Zamowienie zostało stworzone"),

@@ -3,6 +3,7 @@ package org.example.kolosTest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Order {
 
@@ -17,8 +18,13 @@ public class Order {
 
     private List<Ingredient> ingredients = new ArrayList<>();
 
-    public List<Ingredient> getIngredients() {
-        return ingredients;
+    public String getIngredients() {
+//        String s=ingredients.stream().collect(Collectors.joining(", "));
+        StringBuilder s= new StringBuilder();
+        for (Ingredient ingredient : ingredients) {
+            s.append(ingredient.getString()).append(": ").append(ingredient.getInteger()).append("  ");
+        }
+        return s.toString();
     }
 
     public void setIngredient(List<Ingredient> ingredient) {
@@ -58,7 +64,7 @@ public class Order {
         this.orderStatus = orderStatus;
     }
 // sprobowac z tego srobic statica ktory sam bedzie obslugiwal zwiekszanie orderID
-    private Integer orderID;
+    private int orderID;
 
     public Integer getOrderID() {
         return orderID;

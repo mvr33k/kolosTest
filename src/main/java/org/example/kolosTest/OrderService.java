@@ -19,27 +19,30 @@ public class OrderService {
     public String cancelOrder(int orderId) {
         Order order = orderStorage.findOrderById(orderId).orElseThrow();
         order.setOrderStatus(OrderStatus.ANULOWANE);
-        return order.getOrderStatus().toString();
+        return (order.getOrderStatus() + " : " + order.getOrderStatus().getFeedback() + "\n" + "ID zamowienia: " + order.getOrderID() );
+    }
+
+    public String confirmDelivery(int orderId) {
+        Order order = orderStorage.findOrderById(orderId).orElseThrow();
+        order.setOrderStatus(OrderStatus.DOSTARCZONE);
+        return (order.getOrderStatus() + "\n" + "ID zamowienia: " + order.getOrderID() );
     }
 
     // to ma zwracać 2 różne typy
     // Ingredient i status
-    public ToCheckStatus checkOrderStatus(int orderId) {
+    public String checkOrderStatus(int orderId) {
         Order order = orderStorage.findOrderById(orderId).orElseThrow();
-        return new ToCheckStatus(order.getIngredients(), order.getOrderStatus());
+        return order.getOrderStatus() + " " + order.getIngredients();
+//        return new ToCheckStatus(order.getIngredients(), order.getOrderStatus());
     }
 
-    public void changeOrderStatus(int orderId, OrderStatus status){
+    public void changeOrderStatus(int orderId, OrderStatus status) {
         Order order = orderStorage.findOrderById(orderId).orElseThrow();
         order.setOrderStatus(status);
     }
 
 
-
-
-
-
-// czy da się to zrobić jakoś inaczej?
+    // czy da się to zrobić jakoś inaczej?
     private int orderID = 0;
 
     private int nextID() {   // funkcja do zwiekszania id z kolejnymi zamowieniami
